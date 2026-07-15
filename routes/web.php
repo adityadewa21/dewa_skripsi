@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\CartController;
 
