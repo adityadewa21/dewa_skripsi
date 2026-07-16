@@ -70,9 +70,10 @@ class CheckoutController extends Controller
             /* ===============================
             * SIMPAN ORDER
             * =============================== */
+            $orderCode = 'ORD-' . strtoupper(Str::random(8));
             $order = Order::create([
                 'user_id' => auth()->id(),
-                'order_code' => 'ORD-' . strtoupper(Str::random(8)),
+                'order_code' => $orderCode,
 
                 'customer_name'    => $request->customer_name,
                 'customer_phone'   => $request->customer_phone,
@@ -82,6 +83,7 @@ class CheckoutController extends Controller
                 'status' => 'menunggu konfirmasi',
 
                 'whatsapp_message' => $this->generateWhatsappMessage(
+                    $orderCode,
                     $product,
                     $variant,
                     $request->quantity,
@@ -111,11 +113,11 @@ class CheckoutController extends Controller
         });
     }
 
-    private function generateWhatsappMessage($product, $variant, $qty, $total)
+    private function generateWhatsappMessage($orderCode, $product, $variant, $qty, $total)
     {
         return urlencode(
             "Halo Admin,\n\n" .
-            "Order ID : \n" .
+            "Order ID : {$orderCode}\n" .
             "Produk : {$product->name}\n" .
             "Varian : {$variant->color_name}\n" .
             "Qty    : {$qty}\n" .
